@@ -1,0 +1,35 @@
+/*
+  This Arduino sketch sets up a Serial communication with the computer 
+  and a Bluetooth module (HC-05). It echoes any data received from 
+  the Bluetooth module to the Serial Monitor and vice versa. This can 
+  be used to test if the Bluetooth module is functioning correctly.
+
+  More information and detailed steps can be found at:
+  https://atribot.com/how-to-test-the-hc-05-bluetooth-module/
+*/
+
+void setup() {
+  // Begin the Serial communication with the computer
+  Serial.begin(9600);
+  
+  // Wait for the Serial Monitor to open
+  while (!Serial) {
+    ; // Wait for the serial port to connect. Needed for native USB
+  }
+  
+  Serial.println("Hc-05 Bluetooth module test");
+}
+
+void loop() {
+  // If data comes in from the Bluetooth module, send it to the serial monitor
+  if (Serial.available()) {
+    char c = Serial.read();
+    Serial.write(c);
+  }
+
+  // If data comes in from the serial monitor, send it to the Bluetooth module
+  if (Serial.available()) {
+    char c = Serial.read();
+    Serial.write(c);
+  }
+}
